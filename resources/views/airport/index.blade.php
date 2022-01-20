@@ -15,8 +15,6 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Unique Id</th>
-                            <th>Location</th>
                             <th>Date</th>
                             <th>STATUS</th>
                             <th>ACTION</th>
@@ -35,16 +33,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <div>
-                                    <span>{{$Airport->identification_no}}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div>
-                                    <span>{{$Airport->location}}</span>
-                                </div>
-                            </td>
+                           
                             <td>
                                 {{Carbon\Carbon::parse($Airport->created_at)->diffForHumans()}}
                             </td>
@@ -57,7 +46,7 @@
                             </td>
                             <td>
                                 <div class="d-flex action-button">
-                                    <a href="javascript:void(0);" data-id="{{$Airport->id}}" data-name="{{$Airport->name}}" data-identifier="{{$Airport->identification_no}}" data-location="{{$Airport->location}}" class="btn btn-info btn-xs light px-2 edit-trigger">
+                                    <a href="javascript:void(0);" data-id="{{$Airport->id}}" data-name="{{$Airport->name}}"  class="btn btn-info btn-xs light px-2 edit-trigger">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
@@ -99,18 +88,7 @@
                                     <input type="text" name="name" class="form-control" placeholder="Airport Name">
                                 </div>
                             </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Unique Id</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" placeholder="Airport Id " name="identification_no">
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label class="col-sm-3 col-form-label">Location</label>
-                                <div class="col-sm-9">
-                                    <textarea name="location" cols="30" rows="10" class="form-control"></textarea>
-                                </div>
-                            </div>
+                           
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
@@ -142,18 +120,7 @@
                                 <input type="text" id="name" name="name" class="form-control" placeholder="Airport Name">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Unique Id</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="identification_no" class="form-control" placeholder="Airport Id " name="identification_no">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Location</label>
-                            <div class="col-sm-9">
-                                <textarea name="location" id="location" cols="30" rows="10" class="form-control"></textarea>
-                            </div>
-                        </div>
+                       
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
@@ -176,8 +143,7 @@
             $('body').delegate('.edit-trigger','click',function(){
                     $("#id").val($(this).attr('data-id'))
                     $("#name").val($(this).attr('data-name'));
-                    $("#identification_no").val($(this).attr('data-identifier'));
-                    $("#location").val($(this).attr('data-location'));
+                   
                     $("#EditModal").modal('toggle');
             });
     });

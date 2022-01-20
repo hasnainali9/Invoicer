@@ -14,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
 
+Route::get('/app/profile/update',  [App\Http\Controllers\HomeController::class, 'editProfile'])->name('updateProfile.show');
+Route::post('/app/users/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile.store');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/app/airports', [App\Http\Controllers\AirportController::class, 'index'])->name('airports.home');
 Route::post('/app/airports/store', [App\Http\Controllers\AirportController::class, 'store'])->name('airports.store');
+Route::post('/app/airports/storeAjax', [App\Http\Controllers\AirportController::class, 'storeAjax'])->name('airports.store.ajax');
 Route::post('/app/airports/update', [App\Http\Controllers\AirportController::class, 'update'])->name('airports.update');
 Route::get('/app/airports/status/{id}/{status}', [App\Http\Controllers\AirportController::class, 'statusUpdate'])->name('airports.status.update');
 Route::get('/app/airports/destroy/{id}', [App\Http\Controllers\AirportController::class, 'destroy'])->name('airports.destroy');
@@ -30,6 +33,7 @@ Route::get('/app/airports/destroy/{id}', [App\Http\Controllers\AirportController
 
 Route::get('/app/airlines', [App\Http\Controllers\AirlineController::class, 'index'])->name('airlines.home');
 Route::post('/app/airlines/store', [App\Http\Controllers\AirlineController::class, 'store'])->name('airlines.store');
+Route::post('/app/airlines/storeAjax', [App\Http\Controllers\AirlineController::class, 'storeAjax'])->name('airlines.store.ajax');
 Route::post('/app/airlines/update', [App\Http\Controllers\AirlineController::class, 'update'])->name('airlines.update');
 Route::get('/app/airlines/status/{id}/{status}', [App\Http\Controllers\AirlineController::class, 'statusUpdate'])->name('airlines.status.update');
 Route::get('/app/airlines/destroy/{id}', [App\Http\Controllers\AirlineController::class, 'destroy'])->name('airlines.destroy');
@@ -37,6 +41,7 @@ Route::get('/app/airlines/destroy/{id}', [App\Http\Controllers\AirlineController
 
 Route::get('/app/companies', [App\Http\Controllers\CompanyController::class, 'index'])->name('companies.home');
 Route::post('/app/companies/store', [App\Http\Controllers\CompanyController::class, 'store'])->name('companies.store');
+Route::post('/app/companies/storeAjax', [App\Http\Controllers\CompanyController::class, 'storeAjax'])->name('companies.store.ajax');
 Route::post('/app/companies/update', [App\Http\Controllers\CompanyController::class, 'update'])->name('companies.update');
 Route::get('/app/companies/status/{id}/{status}', [App\Http\Controllers\CompanyController::class, 'statusUpdate'])->name('companies.status.update');
 Route::get('/app/companies/destroy/{id}', [App\Http\Controllers\CompanyController::class, 'destroy'])->name('companies.destroy');
@@ -45,8 +50,12 @@ Route::get('/app/companies/destroy/{id}', [App\Http\Controllers\CompanyControlle
 
 
 Route::get('/app/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.home');
+
+Route::get('/app/invoices/{id}/download', [App\Http\Controllers\InvoiceController::class, 'downloadInvoice'])->name('invoices.view.download');
+
+Route::get('/app/invoices/{id}/view', [App\Http\Controllers\InvoiceController::class, 'ViewSingle'])->name('invoices.view.single');
 Route::get('/app/invoices/new', [App\Http\Controllers\InvoiceController::class, 'addIndex'])->name('invoices.add');
 Route::post('/app/invoices/store', [App\Http\Controllers\InvoiceController::class, 'store'])->name('invoices.store');
+Route::get('/app/invoices/{id}/update/view', [App\Http\Controllers\InvoiceController::class, 'updateIndex'])->name('invoices.update.show');
 Route::post('/app/invoices/update', [App\Http\Controllers\InvoiceController::class, 'update'])->name('invoices.update');
-Route::get('/app/invoices/status/{id}/{status}', [App\Http\Controllers\InvoiceController::class, 'statusUpdate'])->name('invoices.status.update');
 Route::get('/app/invoices/destroy/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('invoices.destroy');

@@ -50,6 +50,33 @@ class CompanyController extends Controller
     }
 
 
+
+
+    public function storeAjax(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'identification_no'=>'required',
+            'location'=>'required',
+            'logo'=>'required',
+            'phone_no'=>"required",
+            'email'=>"required|email",
+        ]);
+        Company::create([
+            'name'=>$request->name,
+            'identification_no'=>$request->identification_no,
+            'location'=>$request->location,
+            'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo'))),
+            'phone_no'=>$request->phone_no,
+            'email'=>$request->email,
+        ]);
+        $response="";
+        foreach(Company::all() as $Company){
+            $response.="<option value='".$Company->id."'>".$Company->name."</option>";
+        }
+        return $response;
+}
+
+
     public function update(Request $request){
         $request->validate([
             'id'=>'required',

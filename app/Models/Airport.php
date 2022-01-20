@@ -16,8 +16,6 @@ class Airport extends Model
      */
     protected $fillable = [
         'name',
-        'identification_no',
-        'location',
         'status'
     ];
 }

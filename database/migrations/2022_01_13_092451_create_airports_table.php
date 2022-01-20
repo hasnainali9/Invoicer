@@ -16,8 +16,6 @@ class CreateAirportsTable extends Migration
         Schema::create('airports', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('identification_no');
-            $table->text('location');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

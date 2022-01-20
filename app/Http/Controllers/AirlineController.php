@@ -43,6 +43,25 @@ class AirlineController extends Controller
     }
 
 
+    public function storeAjax(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'identification_no'=>'required',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        Airline::create([
+            'name'=>$request->name,
+            'identification_no'=>$request->identification_no,
+            'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo')))
+        ]);
+        $response="";
+        foreach(Airline::all() as $airline){
+            $response.="<option value='".$airline->id."'>".$airline->name."</option>";
+        }
+        return $response;
+    }
+
+
     public function update(Request $request){
         $request->validate([
             'id'=>'required',

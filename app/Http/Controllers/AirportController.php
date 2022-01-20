@@ -31,29 +31,38 @@ class AirportController extends Controller
     public function store(Request $request){
             $request->validate([
                 'name'=>'required',
-                'identification_no'=>'required',
-                'location'=>'required'
             ]);
             Airport::create([
                 'name'=>$request->name,
-                'identification_no'=>$request->identification_no,
-                'location'=>$request->location
             ]);
             return redirect()->back()->with('message', 'Data Added Successfully');
+    }
+
+
+
+       
+    public function storeAjax(Request $request){
+            $request->validate([
+                'name'=>'required',
+            ]);
+            Airport::create([
+                'name'=>$request->name,
+            ]);
+            $response="";
+            foreach(Airport::all() as $Airport){
+                $response.="<option value='".$Airport->id."'>".$Airport->name."</option>";
+            }
+            return $response;
     }
 
 
     public function update(Request $request){
         $request->validate([
             'id'=>'required',
-            'name'=>'required',
-            'identification_no'=>'required',
-            'location'=>'required'
+            'name'=>'required'
         ]);
         Airport::where('id',$request->id)->update([
             'name'=>$request->name,
-            'identification_no'=>$request->identification_no,
-            'location'=>$request->location
         ]);
         return redirect()->back()->with('message', 'Data Added Successfully');
     }
