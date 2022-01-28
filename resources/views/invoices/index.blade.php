@@ -15,7 +15,8 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Date</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
@@ -35,6 +36,9 @@
                            
                             <td>
                                 {{Carbon\Carbon::parse($Invoice->created_at)->diffForHumans()}}
+                            </td>
+                            <td>
+                                {{Carbon\Carbon::parse($Invoice->updated_at)->diffForHumans()}}
                             </td>
                         
                             <td>

@@ -4,25 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Invoice extends Model
 {
     use HasFactory;
+ 
 
+
+    
     protected $fillable = [
         'additional_data',
         'no_of_edits',
         'City_code',
         'airline_provided_unique_id',
-        'shiper_name',
-        'shiper_address',
-        'shiper_city_country',
-        'shiper_phone_no',
+        'shiper_details',
 
-        'consignee_name',
-        'consignee_address',
-        'consignee_city_country',
-        'consignee_phone_no',
+        'consignee_details',
 
         'airline_id',
 
@@ -108,6 +104,7 @@ class Invoice extends Model
 
 
         'other_charges',
+        'shipper_signature',
         'executed_on_date',
         'executed_at_place',
 

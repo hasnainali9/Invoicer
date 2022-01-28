@@ -134,7 +134,7 @@
 	
 	//ListDatatableView
 	var table = $('#ListDatatableView').DataTable({
-		searching: false,
+		searching: true,
 		paging:true,
 		select: false,
 		//info: false,         

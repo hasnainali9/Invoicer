@@ -13,38 +13,20 @@
                 <div class="mb-3 row">
                     <label class="col-3 col-form-label">City Code</label>
                     <div class="col-9">
-                       <input type="text" maxlength="4" class="form-control toUpperCase" value="{{old('city_code')}}" name="city_code">
+                       <input type="text" required maxlength="4" class="form-control toUpperCase" value="{{old('city_code')}}" name="city_code">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-3 col-form-label">Airline Provided Unique Id</label>
                     <div class="col-9">
-                       <input type="text" class="form-control" value="{{old('airline_provided_unique_id')}}" name="airline_provided_unique_id">
+                       <input type="text" required class="form-control" value="{{old('airline_provided_unique_id')}}" name="airline_provided_unique_id">
                     </div>
                 </div>
 
                 <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Shipper's Name</label>
+                    <label class="col-3 col-form-label">Shipper's Details</label>
                     <div class="col-9">
-                       <textarea class="form-control" maxlength="40" name="shiper_name">{{old('shiper_name')}}</textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Shipper's Address</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="67" name="shiper_address">{{old('shiper_address')}}</textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Shipper's City & Country</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="130" name="shiper_city_country">{{old('shiper_city_country')}}</textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Shipper's Phone No</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="20" name="shiper_phone_no">{{old('shiper_phone_no')}}</textarea>
+                       <textarea class="form-control" rows="4" name="shiper_details">{{old('shiper_details')}}</textarea>
                     </div>
                 </div>
 
@@ -53,29 +35,12 @@
 
 
                 <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Consignee's Name </label>
+                    <label class="col-3 col-form-label">Consignee's Details </label>
                     <div class="col-9">
-                        <textarea class="form-control" maxlength="40" name="consignee_name">{{old('consignee_name')}}</textarea>
+                        <textarea class="form-control" rows="4" name="consignee_details">{{old('consignee_details')}}</textarea>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Consignee's Address</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="130" name="consignee_address">{{old('consignee_address')}}</textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Consignee's City & Country</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="67" name="consignee_city_country">{{old('consignee_city_country')}}</textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-3 col-form-label">Consignee's Phone No</label>
-                    <div class="col-9">
-                        <textarea class="form-control" maxlength="20" name="consignee_phone_no">{{old('consignee_phone_no')}}</textarea>
-                    </div>
-                </div>
+
 
 
 
@@ -517,6 +482,13 @@
 
 
 
+                
+                <div class="mb-3 row">
+                    <label class="col-12 col-form-label">Shipper Signature</label>
+                    <div class="col-12">
+                        <input type="text" id="shipper_signature" value="{{old('shipper_signature')}}" name="shipper_signature" class="form-control">
+                    </div>
+                </div>
 
                 <div class="mb-3 row">
                         <label class="col-12 col-form-label">Executed on (Date)</label>
@@ -524,6 +496,7 @@
                             <input type="date" id="executed" value="{{old('executed_on_date')}}" name="executed_on_date" class="form-control">
                         </div>
                 </div>
+
 
 
                 <div class="mb-3 row">
@@ -710,10 +683,6 @@
 <script type="text/javascript">
     $(function(){
 
-        @if($Invoice->accounting_payment_info=="ChargesCollected")
-                $(".collected").removeAttr('disabled');
-                $(".prepaid").attr('disabled','disabled');
-        @endif
         $('#charge_weight').on('change',function(){
             var total=parseFloat($(this).val())*parseFloat($("#rate_per_charge").val());
           $("#total_of_weight_based_on_charge").val(total);
@@ -830,7 +799,7 @@
                     success: (response) => {
                         if (response) {
                         this.reset();
-                            $("#airline_id").html('response');
+                            $("#airline_id").html(response);
                         toastr.success("Airline Uploaded", {
                             timeOut: 500000000,
                             closeButton: !0,
@@ -953,7 +922,7 @@
                     success: (response) => {
                         if (response) {
                         this.reset();
-                            $("#issung_company_id").html('response');
+                            $("#issung_company_id").html(response);
                         toastr.success("Company Uploaded", {
                             timeOut: 500000000,
                             closeButton: !0,
