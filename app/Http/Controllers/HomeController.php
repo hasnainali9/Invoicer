@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Invoice;
 use Auth;
 
 class HomeController extends Controller
@@ -24,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home',['Invoices'=>Invoice::latest()->get()]);
     }
 
 
@@ -37,18 +38,18 @@ class HomeController extends Controller
         return view('auth.profile', compact('user'));
     }
 
-    public function updateProfile()
+    public function updateProfile(Request $request)
     { 
+        $user=Auth::user();
         if(Auth::user()->email == request('email')) {
-        
-        $this->validate(request(), [
+            
+            $request->validate([
                 'name' => 'required',
-              //  'email' => 'required|email|unique:users',
+                
                 'password' => 'required|min:6|confirmed'
             ]);
 
             $user->name = request('name');
-           // $user->email = request('email');
             $user->password = bcrypt(request('password'));
             $user->save();
             return back();
@@ -56,10 +57,9 @@ class HomeController extends Controller
         }
         else{
             
-        $this->validate(request(), [
+            $request->validate([
                 'name' => 'required',
-                //'email' => 'required|email|unique:users',
-                'email' => 'email|required|unique:users,email,'.$this->segment(2),
+                'email' => 'email|required|unique:users',
                 'password' => 'required|min:6|confirmed'
             ]);
 

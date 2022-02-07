@@ -17,16 +17,13 @@ class InvoicePageSeeder extends Seeder
     {
         DB::table('invoice_pages')->insert([
             [
-                'title'=>"Original 3 (for Shipper)"
-            ],
-            [
-                'title'=>"Copy 8 (for Agent)"
-            ],
-            [
                 'title'=>"Original 1 (for Issuing Carrier)"
             ],
             [
                 'title'=>"Original 2 (for Consignee)"
+            ],
+            [
+                'title'=>"Original 3 (for Shipper)"
             ],
             [
                 'title'=>"Copy 4 (for Delivery Receipt)"
@@ -41,6 +38,9 @@ class InvoicePageSeeder extends Seeder
                 'title'=>"Copy 7 (Extra Copy)"
             ],
             [
+                'title'=>"Copy 8 (for Agent)"
+            ],
+            [
                 'title'=>"Copy 9 (Extra Copy for Carr)"
             ],
             [
@@ -48,6 +48,9 @@ class InvoicePageSeeder extends Seeder
             ],
             [
                 'title'=>"Copy 11 (Extra Copy for Carr)"
+            ],
+            [
+                'title'=>"Copy 12 (Extra Copy for Carr)"
             ],
         ]);
     }

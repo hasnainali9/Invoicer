@@ -12,13 +12,23 @@ class Invoice extends Model
 
     
     protected $fillable = [
-        'additional_data',
+        'additional_data_1',
+        'additional_data_2',
+        'additional_data_3',
+        'additional_data_4',
+        'additional_data_5',
+        'additional_data_6',
+        'additional_data_7',
+        'additional_data_8',
+
+
+
         'no_of_edits',
         'City_code',
         'airline_provided_unique_id',
-        'shiper_details',
+        'shiper_id',
 
-        'consignee_details',
+        'consignee_id',
 
         'airline_id',
 

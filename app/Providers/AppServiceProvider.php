@@ -9,6 +9,7 @@ use App\Models\Airport;
 use App\Models\Company;
 use App\Models\InvoicePage;
 use App\Models\Invoice;
+use App\Models\Client;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -36,8 +37,8 @@ class AppServiceProvider extends ServiceProvider
                 'Airports'=>Airport::all(),
                 'Airlines'=>Airline::all(),
                 'Companies'=>Company::all(), 
-                'Invoices'=>Invoice::all(),
-                'InvoicePager'=>InvoicePage::all()
+                'InvoicePager'=>InvoicePage::all(),
+                'Clients'=>Client::all()
             ]);
         });
     }

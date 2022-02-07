@@ -24,124 +24,117 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('company.index');
+        if(CheckRolePermission('company_view')){
+            return view('company.index');
+        }else{abort(401);}
     }
     
 
 
      public function store(Request $request){
-            $request->validate([
-                'name'=>'required',
-                'identification_no'=>'required',
-                'location'=>'required',
-                'logo'=>'required',
-                'phone_no'=>"required",
-                'email'=>"required|email",
-            ]);
-            Company::create([
-                'name'=>$request->name,
-                'identification_no'=>$request->identification_no,
-                'location'=>$request->location,
-                'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo'))),
-                'phone_no'=>$request->phone_no,
-                'email'=>$request->email,
-            ]);
-            return redirect()->back()->with('message', 'Data Added Successfully');
+        if(CheckRolePermission('company_add')){
+            $logo="";
+            if($request->hasFile('logo')){
+                $logo="data:image/png;base64,".base64_encode(file_get_contents($request->file('logo')));
+            }
+                Company::create([
+                    'name'=>$request->name,
+                    'identification_no'=>$request->identification_no,
+                    'location'=>$request->location,
+                    'logo'=>$logo,
+                    'phone_no'=>$request->phone_no,
+                    'email'=>$request->email,
+                ]);
+                return redirect()->back()->with('message', 'Data Added Successfully');
+        }else{abort(401);}
     }
 
 
 
 
     public function storeAjax(Request $request){
-        $request->validate([
-            'name'=>'required',
-            'identification_no'=>'required',
-            'location'=>'required',
-            'logo'=>'required',
-            'phone_no'=>"required",
-            'email'=>"required|email",
-        ]);
-        Company::create([
-            'name'=>$request->name,
-            'identification_no'=>$request->identification_no,
-            'location'=>$request->location,
-            'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo'))),
-            'phone_no'=>$request->phone_no,
-            'email'=>$request->email,
-        ]);
-        $response="";
-        foreach(Company::all() as $Company){
-            $response.="<option value='".$Company->id."'>".$Company->name."</option>";
-        }
-        return $response;
+        if(CheckRolePermission('company_add')){
+            $logo="";
+            if($request->hasFile('logo')){
+                $logo="data:image/png;base64,".base64_encode(file_get_contents($request->file('logo')));
+            }
+            Company::create([
+                'name'=>$request->name,
+                'identification_no'=>$request->identification_no,
+                'location'=>$request->location,
+                'logo'=>$logo,
+                'phone_no'=>$request->phone_no,
+                'email'=>$request->email,
+            ]);
+            $response="";
+            foreach(Company::all() as $Company){
+                $response.="<option value='".$Company->id."'>".$Company->name."</option>";
+            }
+            return $response;
+        }else{abort(401);}
 }
 
 
     public function update(Request $request){
-        $request->validate([
-            'id'=>'required',
-            'name'=>'required',
-            'identification_no'=>'required',
-            'location'=>'required',
-            'phone_no'=>"required",
-            'email'=>"required|email",
-        ]);
-        if($request->hasFile('logo')){
-            $request->validate([
-                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            ]);
-
-            Company::where('id',$request->id)->update([
-                'name'=>$request->name,
-                'identification_no'=>$request->identification_no,
-                'location'=>$request->location,
-                'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo'))),
-                'phone_no'=>$request->phone_no,
-                'email'=>$request->email,
-            ]);
-        }else{
-            Company::where('id',$request->id)->update([
-                'name'=>$request->name,
-                'location'=>$request->location,
-                'identification_no'=>$request->identification_no,
-                'phone_no'=>$request->phone_no,
-                'email'=>$request->email,
-            ]);
-        }
-        
-        return redirect()->back()->with('message', 'Data Added Successfully');
+        if(CheckRolePermission('company_edit')){
+            if($request->hasFile('logo')){
+            
+                Company::where('id',$request->id)->update([
+                    'name'=>$request->name,
+                    'identification_no'=>$request->identification_no,
+                    'location'=>$request->location,
+                    'logo'=>"data:image/png;base64,".base64_encode(file_get_contents($request->file('logo'))),
+                    'phone_no'=>$request->phone_no,
+                    'email'=>$request->email,
+                ]);
+            }else{
+                Company::where('id',$request->id)->update([
+                    'name'=>$request->name,
+                    'location'=>$request->location,
+                    'identification_no'=>$request->identification_no,
+                    'phone_no'=>$request->phone_no,
+                    'email'=>$request->email,
+                ]);
+            }
+            
+            return redirect()->back()->with('message', 'Data Added Successfully');
+        }else{abort(401);}
     }
 
 
 
     public function statusUpdate($id,$status){
-        $id=base64_decode($id);
-        $status=base64_decode($status);
-        if($status=="true"){
-            $status=true;
-        }else if($status=="false"){
-            $status=false;
-        }else{
-            return redirect()->back()->withErrors(['Unauthorized Access']);   
-        }
-        if(Company::where('id',$id)->get()->count()>0){
-            Company::where('id',$id)->update([
-                'status'=>$status
-            ]);
-            return redirect()->back()->with('message', 'Status Updated Successfully');
-        }else{
-            return redirect()->back()->withErrors(['Unauthorized Access']);   
-        }
+        if(CheckRolePermission('company_edit')){
+            $id=base64_decode($id);
+            $status=base64_decode($status);
+            if($status=="true"){
+                $status=true;
+            }else if($status=="false"){
+                $status=false;
+            }else{
+                return redirect()->back()->withErrors(['Unauthorized Access']);   
+            }
+            if(Company::where('id',$id)->get()->count()>0){
+                Company::where('id',$id)->update([
+                    'status'=>$status
+                ]);
+                return redirect()->back()->with('message', 'Status Updated Successfully');
+            }else{
+                return redirect()->back()->withErrors(['Unauthorized Access']);   
+            }
+        }else{abort(401);}
     }
 
 
 
     public function destroy($id){
-        if(Company::where('id',$id)->get()->count()>0){
-            Company::where('id',$id)->delete();
-            return redirect()->back()->with('message', 'Data Deleted Successfully');
-        }else{
-            return redirect()->back()->withErrors(['Unauthorized Access']);   
-        }
+        if(CheckRolePermission('company_delete')){
+            if(Company::where('id',$id)->get()->count()>0){
+                Company::where('id',$id)->delete();
+                return redirect()->back()->with('message', 'Data Deleted Successfully');
+            }else{
+                return redirect()->back()->withErrors(['Unauthorized Access']);   
+            }
+        }else{abort(401);}
     }
 }

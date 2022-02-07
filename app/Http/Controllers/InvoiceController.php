@@ -28,7 +28,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        return view('invoices.index',['Invoices'=>Invoice::orderBy('id', 'DESC')->get()]);
+        if(CheckRolePermission('airway_view')){
+            return view('invoices.index',['Invoices'=>Invoice::latest()->get()]);
+        }else{abort(401);}
     }
 
 
@@ -40,15 +42,18 @@ class InvoiceController extends Controller
      */
     public function addIndex()
     {
-        return view('invoices.add');
+        if(CheckRolePermission('airway_add')){
+            return view('invoices.add');
+        }else{abort(401);}
     }
 
     public function store(Request $request){
+        if(CheckRolePermission('airway_add')){
         $Invoice=Invoice::create([
             'City_code'=>$request['city_code'],
             'airline_provided_unique_id'=>$request['airline_provided_unique_id'],
-            'shiper_details'=>$request['shiper_details'],
-            'consignee_details'=>$request['consignee_details'],
+            'shiper_id'=>$request['shiper_id'],
+            'consignee_id'=>$request['consignee_id'],
             'airline_id'=>$request['airline_id'],
             'issung_company_id'=>$request['issung_company_id'],
             'accounting_payment_info'=>$request['accounting_payment_info'],
@@ -104,14 +109,23 @@ class InvoiceController extends Controller
             'shipper_signature'=>$request['shipper_signature'],
             'executed_on_date'=>$request['executed_on_date'],
             'executed_at_place'=>$request['executed_at_place'],
-            'additional_data'=>$request['additional_data'],
+            'additional_data_1'=>$request['additional_data_1'],
+            'additional_data_2'=>$request['additional_data_2'],
+            'additional_data_3'=>$request['additional_data_3'],
+            'additional_data_4'=>$request['additional_data_4'],
+            'additional_data_5'=>$request['additional_data_5'],
+            'additional_data_6'=>$request['additional_data_6'],
+            'additional_data_7'=>$request['additional_data_7'],
+            'additional_data_8'=>$request['additional_data_8'],
             'no_of_edits'=>0,
         ]);
         return redirect('/app/invoices')->with('message', 'Data Added Successfully');
+        }else{abort(401);}
     }
 
 
     public function update(Request $request){
+        if(CheckRolePermission('airway_edit')){
         if(!Invoice::where('id',$request->id)->first()){
             return abort(404);
         }
@@ -121,8 +135,8 @@ class InvoiceController extends Controller
             'invoice_id'=>$request->id,
             'City_code'=>$request['city_code'],
             'airline_provided_unique_id'=>$request['airline_provided_unique_id'],
-            'shiper_details'=>$request['shiper_details'],
-            'consignee_details'=>$request['consignee_details'],
+            'shiper_id'=>$request['shiper_id'],
+            'consignee_id'=>$request['consignee_id'],
             'airline_id'=>$request['airline_id'],
             'issung_company_id'=>$request['issung_company_id'],
             'accounting_payment_info'=>$request['accounting_payment_info'],
@@ -178,13 +192,20 @@ class InvoiceController extends Controller
             'shipper_signature'=>$request['shipper_signature'],
             'executed_on_date'=>$request['executed_on_date'],
             'executed_at_place'=>$request['executed_at_place'],
-            'additional_data'=>$request['additional_data'],
+            'additional_data_1'=>$request['additional_data_1'],
+            'additional_data_2'=>$request['additional_data_2'],
+            'additional_data_3'=>$request['additional_data_3'],
+            'additional_data_4'=>$request['additional_data_4'],
+            'additional_data_5'=>$request['additional_data_5'],
+            'additional_data_6'=>$request['additional_data_6'],
+            'additional_data_7'=>$request['additional_data_7'],
+            'additional_data_8'=>$request['additional_data_8'],
         ]);
         Invoice::where('id',$request->id)->update([        
             'City_code'=>$request['city_code'],
             'airline_provided_unique_id'=>$request['airline_provided_unique_id'],
-            'shiper_details'=>$request['shiper_details'],
-            'consignee_details'=>$request['consignee_details'],
+            'shiper_id'=>$request['shiper_id'],
+            'consignee_id'=>$request['consignee_id'],
             'airline_id'=>$request['airline_id'],
             'issung_company_id'=>$request['issung_company_id'],
             'accounting_payment_info'=>$request['accounting_payment_info'],
@@ -240,57 +261,161 @@ class InvoiceController extends Controller
             'shipper_signature'=>$request['shipper_signature'],
             'executed_on_date'=>$request['executed_on_date'],
             'executed_at_place'=>$request['executed_at_place'],
-            'additional_data'=>$request['additional_data'],
+            'additional_data_1'=>$request['additional_data_1'],
+            'additional_data_2'=>$request['additional_data_2'],
+            'additional_data_3'=>$request['additional_data_3'],
+            'additional_data_4'=>$request['additional_data_4'],
+            'additional_data_5'=>$request['additional_data_5'],
+            'additional_data_6'=>$request['additional_data_6'],
+            'additional_data_7'=>$request['additional_data_7'],
+            'additional_data_8'=>$request['additional_data_8'],
             'no_of_edits'=>$no_of_edits,
         ]);
         return redirect('/app/invoices')->with('message', 'Data Updated Successfully');
+        }else{abort(401);}
     }
 
 
     public function downloadInvoice($id){
-         $id=base64_decode($id);
-        if(Invoice::where('id',$id)->first()){
-            
-            $data = [
-                'Invoice'=>Invoice::where('id',$id)->first()
-              ];
-            $pdf = PDF::loadView('pdfview',$data);
-            return $pdf->download('document.pdf');;
-            ;
-                //return view('invoices.single',['Invoice'=>Invoice::where('id',$id)->first()]);
-        }else{
-            return abort(404);
-        }
+        if(CheckRolePermission('airway_view')){
+            $id=base64_decode($id);
+            if(Invoice::where('id',$id)->first()){
+                
+                $data = [
+                    'Invoice'=>Invoice::where('id',$id)->first()
+                ];
+                $pdf = PDF::loadView('pdfview',$data);
+                return $pdf->download('document.pdf');;
+                ;
+                    //return view('invoices.single',['Invoice'=>Invoice::where('id',$id)->first()]);
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
     }
 
 
     public function ViewSingle($id){
-        $id=base64_decode($id);
-        if(Invoice::where('id',$id)->first()){
-                return view('invoices.single',['Invoice'=>Invoice::where('id',$id)->first()]);
-        }else{
-            return abort(404);
-        }
+        if(CheckRolePermission('airway_view')){
+            $id=base64_decode($id);
+            if(Invoice::where('id',$id)->first()){
+                    return view('invoices.single',['Invoice'=>Invoice::where('id',$id)->first()]);
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
     }
 
 
+
+
     public function updateIndex($id){
-        $id=base64_decode($id);
-        if(Invoice::where('id',$id)->first()){
-                return view('invoices.edit',['Invoice'=>Invoice::where('id',$id)->first()]);
-        }else{
-            return abort(404);
-        }
+        if(CheckRolePermission('airway_edit')){
+            $id=base64_decode($id);
+            if(Invoice::where('id',$id)->first()){
+                    return view('invoices.edit',['Invoice'=>Invoice::where('id',$id)->first()]);
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
     }
 
 
     public function destroy($id){
-        $id=base64_decode($id);
-        if(Invoice::where('id',$id)->first()){
-               Invoice::where('id',$id)->delete();
-               return redirect('/app/invoices')->with('message', 'Data Deleted Successfully');
-        }else{
-            return abort(404);
-        }
+        if(CheckRolePermission('airway_delete')){
+            $id=base64_decode($id);
+            if(Invoice::where('id',$id)->first()){
+                Invoice::where('id',$id)->delete();
+                return redirect('/app/invoices')->with('message', 'Data Deleted Successfully');
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function VersionsShowAll($id){
+        if(CheckRolePermission('airway_versions_view')){
+            $id=base64_decode($id);
+            if(Invoice::where('id',$id)->first()){
+                    return view('invoices.versions',[
+                        'Invoice'=>Invoice::where('id',$id)->first(),
+                        'Versions'=>InvoiceVersion::where('invoice_id',$id)->get()
+                    ]);
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
+    }
+
+    public function VersionsShow($id){
+        if(CheckRolePermission('airway_versions_view_single')){
+            $id=base64_decode($id);
+            if(InvoiceVersion::where('id',$id)->first()){
+                    return view('invoices.single',['Invoice'=>InvoiceVersion::where('id',$id)->first()]);
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
+    }
+
+
+
+    public function VersionsRollBack($id){
+        if(CheckRolePermission('airway_versions_roll_back')){
+            $id=base64_decode($id);
+            if(InvoiceVersion::where('id',$id)->first()){
+                $staff = InvoiceVersion::where('id',$id)->first()->replicate();
+                    $staff = $staff->toArray();
+                    unset($staff['invoice_id']);
+                    
+                    Invoice::where('id',InvoiceVersion::where('id',$id)->first()->invoice_id)->update($staff);
+                    return redirect('/app/invoices')->with('message', 'Version Roll Back Successfully Complete');
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
+    }
+
+
+
+
+
+    
+    public function VersionDestroy($id){
+        if(CheckRolePermission('airway_versions_delete')){
+            $id=base64_decode($id);
+            if(InvoiceVersion::where('id',$id)->first()){
+                InvoiceVersion::where('id',$id)->delete();
+                return redirect('/app/invoices')->with('message', 'Invoice Version Deleted Successfully');
+            }else{
+                return abort(404);
+            }
+        }else{abort(401);}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

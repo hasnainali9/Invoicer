@@ -21,7 +21,24 @@ Auth::routes();
 
 Route::get('/app/profile/update',  [App\Http\Controllers\HomeController::class, 'editProfile'])->name('updateProfile.show');
 Route::post('/app/users/update', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile.store');
+
+Route::get('/app/users',  [App\Http\Controllers\UsersController::class, 'index'])->name('users.show');
+Route::post('/app/users/add',  [App\Http\Controllers\UsersController::class, 'store'])->name('users.create');
+Route::post('/app/users/update',  [App\Http\Controllers\UsersController::class, 'update'])->name('users.update');
+Route::get('/app/users/{id}/delete',  [App\Http\Controllers\UsersController::class, 'destroy'])->name('users.destroy');
+
+Route::get('/app/user/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.show');
+
+
+
+
+
+
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
 Route::get('/app/airports', [App\Http\Controllers\AirportController::class, 'index'])->name('airports.home');
 Route::post('/app/airports/store', [App\Http\Controllers\AirportController::class, 'store'])->name('airports.store');
@@ -49,11 +66,28 @@ Route::get('/app/companies/destroy/{id}', [App\Http\Controllers\CompanyControlle
 
 
 
+Route::get('/app/client', [App\Http\Controllers\ClientController::class, 'index'])->name('client.home');
+Route::post('/app/client/store', [App\Http\Controllers\ClientController::class, 'store'])->name('client.store');
+Route::post('/app/client/storeAjax', [App\Http\Controllers\ClientController::class, 'storeAjax'])->name('client.store.ajax');
+Route::post('/app/client/update', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::get('/app/client/destroy/{id}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('client.destroy');
+
+
+
+
+
+
 Route::get('/app/invoices', [App\Http\Controllers\InvoiceController::class, 'index'])->name('invoices.home');
 
 Route::get('/app/invoices/{id}/download', [App\Http\Controllers\InvoiceController::class, 'downloadInvoice'])->name('invoices.view.download');
 
 Route::get('/app/invoices/{id}/view', [App\Http\Controllers\InvoiceController::class, 'ViewSingle'])->name('invoices.view.single');
+Route::get('/app/invoices/{id}/view/versions', [App\Http\Controllers\InvoiceController::class, 'VersionsShowAll'])->name('invoices.view.single.versions');
+Route::get('/app/invoices/view/versions/{id}', [App\Http\Controllers\InvoiceController::class, 'VersionsShow'])->name('invoices.view.single.versions.show');
+Route::get('/app/invoices/versions/{id}/roll/back', [App\Http\Controllers\InvoiceController::class, 'VersionsRollBack'])->name('invoices.view.single.versions.roll.back');
+Route::get('/app/invoices/versions/{id}/destroy', [App\Http\Controllers\InvoiceController::class, 'VersionDestroy'])->name('invoices.view.single.versions.destroy');
+
+
 Route::get('/app/invoices/new', [App\Http\Controllers\InvoiceController::class, 'addIndex'])->name('invoices.add');
 Route::post('/app/invoices/store', [App\Http\Controllers\InvoiceController::class, 'store'])->name('invoices.store');
 Route::get('/app/invoices/{id}/update/view', [App\Http\Controllers\InvoiceController::class, 'updateIndex'])->name('invoices.update.show');

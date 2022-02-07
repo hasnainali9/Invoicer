@@ -18,9 +18,9 @@ class CreateInvoicesTable extends Migration
             $table->integer('no_of_edits');
             $table->text('City_code')->nullable();
             $table->text('airline_provided_unique_id')->nullable();
-            $table->text('shiper_details')->nullable();
+            $table->text('shiper_id')->nullable();
 
-            $table->text('consignee_details')->nullable();
+            $table->text('consignee_id')->nullable();
 
             $table->integer('airline_id')->unsigned();
             $table->foreign('airline_id')->references('id')->on('airlines');
@@ -88,7 +88,14 @@ class CreateInvoicesTable extends Migration
             $table->text('nature_quantity_of_good')->nullable();
 
 
-            $table->longtext('additional_data')->nullable();
+            $table->text('additional_data_1')->nullable();
+            $table->text('additional_data_2')->nullable();
+            $table->text('additional_data_3')->nullable();
+            $table->text('additional_data_4')->nullable();
+            $table->text('additional_data_5')->nullable();
+            $table->text('additional_data_6')->nullable();
+            $table->text('additional_data_7')->nullable();
+            $table->text('additional_data_8')->nullable();
             
             $table->text('weight_charge_prepaid')->nullable();
             $table->text('weight_charge_collected')->nullable();

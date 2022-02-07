@@ -9,35 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('/files/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('/files/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/files/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
         <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/files/vendor/toastr/css/toastr.min.css')}}">
-    <link href="{{ asset('/files/vendor/jquery-smartwizard/dist/css/smart_wizard.min.css')}}" rel="stylesheet">
 </head>
 <body>
-     <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="sk-three-bounce">
-            <div class="sk-child sk-bounce1"></div>
-            <div class="sk-child sk-bounce2"></div>
-            <div class="sk-child sk-bounce3"></div>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
+
     
     <!--**********************************
         Main wrapper start
@@ -134,36 +113,65 @@
 					<p class="email">{{Auth::User()->email}}</p>
 				</div>
 				<ul class="metismenu" id="menu">
-					<li class="nav-label first">Main Menu</li>
-                    <li><a class=" ai-icon" href="javascript:void()" aria-expanded="false">
-							<i class="flaticon-144-layout"></i>
-							<span class="nav-text">Dashboard</span>
-						</a>
+					<li><a class=" ai-icon" href="javascript:void()" aria-expanded="false">
+                            <i class="flaticon-144-layout"></i>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
                     </li>
-					<li class="nav-label">Invoice</li>
+                    <li class="nav-label first">Main Menu</li>
+                    @if(CheckRolePermission('airway_view'))
                     <li><a class="ai-icon" href="{{route('invoices.home')}}" aria-expanded="false">
 						<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="19" height="18" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"viewBox="0 0 0.42 0.49" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"><![CDATA[ .fil0{fill:#FEFFFF}]]> </style> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <g id="_987666304"> <path class="fil0" d="M0.04 0.36l0.29 -0 0 0.02 -0.29 0 -0 -0.02zm0.17 -0.07l0.12 -0 0 0.02 -0.12 0 -0 -0.02zm-0.18 -0.01c0,0 0.01,0.01 0.03,0.02 0.03,0.01 0.09,0.01 0.12,-0.01 0,-0 0.01,-0.01 0.01,-0.01 0,0.01 -0,0.02 -0.01,0.02 -0.03,0.03 -0.11,0.03 -0.15,-0 -0,-0 -0.01,-0.02 -0.01,-0.02zm0 -0.03c0,0 0.01,0.01 0.01,0.01 0.04,0.02 0.1,0.02 0.14,-0.01 0,-0 0.01,-0.01 0.01,-0.01 0,0.02 -0.01,0.03 -0.03,0.04 -0.04,0.02 -0.1,0.01 -0.13,-0.01 -0,-0 -0.01,-0.02 -0.01,-0.02zm0.18 -0.03l0 -0 0.11 0 0 0 0 0.02 -0.12 0 0 -0.02zm-0.18 0.01c0,0 0.01,0.01 0.01,0.01 0.01,0 0.01,0.01 0.02,0.01 0.03,0.01 0.06,0.01 0.09,0 0.02,-0.01 0.03,-0.02 0.03,-0.02 0,0.02 -0.01,0.03 -0.03,0.04 -0.03,0.02 -0.1,0.02 -0.13,-0.01 -0,-0 -0.01,-0.02 -0.01,-0.02zm0 -0.03c0,0 0,0 0.01,0.01 0.03,0.03 0.11,0.03 0.14,0 0,-0 0,-0 0.01,-0.01 0.01,0.02 -0.01,0.03 -0.03,0.04 -0.02,0.01 -0.03,0.01 -0.05,0.01 -0.02,0 -0.04,-0 -0.05,-0.01 -0.01,-0 -0.01,-0.01 -0.02,-0.01 -0,-0 -0.01,-0.02 -0.01,-0.02zm0.08 -0c0.03,0 0.06,-0.01 0.08,-0.03 0.01,0.04 -0.08,0.06 -0.13,0.04 -0.01,-0 -0.01,-0.01 -0.02,-0.01 -0,-0 -0.01,-0.02 -0.01,-0.02 0,0 0.01,0.01 0.01,0.01 0.02,0.01 0.04,0.02 0.06,0.02zm0.1 -0.05l0.12 0 -0 0.02 -0.12 -0 -0 -0.02zm-0.12 -0.04c0.03,-0 0.08,0.01 0.09,0.03 0.01,0.02 -0.01,0.03 -0.02,0.04 -0.01,0.01 -0.03,0.01 -0.05,0.01 -0.02,0 -0.04,-0 -0.05,-0 -0.04,-0.01 -0.06,-0.04 -0.02,-0.06 0.01,-0.01 0.03,-0.01 0.05,-0.01zm0.12 -0.03l0.12 0 -0 0.02 -0.12 -0 0 -0.02zm0.16 -0.08l-0.36 -0 -0 0.44c0.03,0 0.06,0 0.09,0l0.23 0c0.01,0 0.04,0 0.05,-0l0 -0.43z"/> <polygon class="fil0" points="0.38,0.07 0.4,0.07 0.4,0.46 0.08,0.46 0.08,0.45 0.06,0.45 0.06,0.49 0.42,0.48 0.42,0.05 0.38,0.05 "/> <path class="fil0" d="M0.11 0.17c0.01,-0 0.03,-0 0.03,-0.01 0,-0.01 -0.04,-0.01 -0.05,-0.02 -0.01,-0 0.01,-0.01 0.02,-0.01 0.01,0 0,0.01 0.02,0 0,-0 0,-0 0,-0l0 -0c-0,-0 -0.01,-0.01 -0.01,-0.01 -0.02,-0 -0.01,0 -0.01,-0.01l-0.01 0 -0 0c-0.03,0 -0.03,0.01 -0.02,0.02 0.01,0 0.02,0.01 0.03,0.01 0.02,0 -0,0.01 -0.02,0.01 -0,-0 -0,-0 -0.01,-0l-0.02 0c0,0.01 0.02,0.01 0.03,0.01l0 0.01 0.01 0 0 -0.01z"/> </g> </g></svg>
 							<span class="nav-text">AirWay Bills</span>
 						</a>
                     </li>
-					<li class="nav-label">Airports</li>
+                    @endif
+                    @if(CheckRolePermission('airport_view'))
                     <li><a class="ai-icon" href="{{route('airports.home')}}" aria-expanded="false">
 						<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="18" height="18" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"viewBox="0 0 0.57 0.56" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"><![CDATA[ .fil0{fill:#969BA0}]]> </style> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <g id="_986645944"> <path class="fil0" d="M0.39 0.19l0.03 -0c0,-0 0,-0 0.01,0 0.01,0.01 0.01,0.02 -0,0.03 -0.02,0.02 -0.05,-0.01 -0.03,-0.03zm-0.21 0c0.01,0.02 -0.01,0.04 -0.03,0.03 -0,-0 -0.01,-0.01 -0.01,-0.01 -0,-0.01 0,-0.01 0,-0.01 0,-0 0.01,-0 0.02,-0 0.01,0 0.01,0 0.02,0zm0.09 -0.02c-0.03,0 -0.03,0.01 -0.03,-0 0,-0.03 0.02,-0.05 0.06,-0.04 0.02,0 0.03,0.02 0.03,0.04 0,0.01 0,0.01 -0.02,0.01 -0.01,-0 -0.02,-0 -0.03,-0zm-0 -0.07c-0.02,0 -0.02,0.02 -0.03,0.02 -0.02,0 -0.08,-0 -0.09,0 0,0 0,0 0,0 0,0 0,0 0,0 0.03,0.01 0.02,0.01 0.06,0.01 0.01,0 0.02,0 0.03,-0 -0,0 -0,0.01 -0.01,0.01 -0,0 -0,0.01 -0.01,0.01l-0.22 0c0,0 0.03,0.01 0.04,0.02 0.01,0 0.08,0.01 0.09,0.01 -0,0.01 -0.01,0.02 0,0.03 0,0.01 0.01,0.02 0.03,0.02 0.01,0 0.02,-0 0.03,-0.01 0.01,-0.01 0.01,-0.02 0.01,-0.03l0.02 0c0,0.01 0,0.01 0.01,0.02 0,0.01 0.01,0.01 0.01,0.01 0.01,0.01 0.02,0.01 0.04,0.01 0.02,0 0.04,-0.01 0.04,-0.02 0.01,-0.01 0.01,-0.02 0.02,-0.03l0.02 -0c-0,0.02 0,0.03 0.02,0.04 0.02,0.01 0.04,-0 0.04,-0.02 0.01,-0.01 0,-0.02 0,-0.03 0.01,-0 0.08,-0.01 0.09,-0.01 0.01,-0 0.04,-0.02 0.04,-0.02l-0.22 -0c-0,-0 -0,-0.01 -0.01,-0.01 -0,-0 -0.01,-0.01 -0.01,-0.01 0.01,0 0.04,0 0.05,0 0,-0 0.01,-0.01 0.02,-0.01 0,-0 0.02,-0.01 0.02,-0.01 -0.01,-0 -0.07,-0 -0.08,-0 -0.01,0 -0.01,0 -0.01,-0l-0.01 -0.01c-0,-0 -0.01,-0 -0.01,-0.01l-0.01 -0.1 -0.01 0 -0.01 0.1z"/> <polygon class="fil0" points="0.28,0.26 0.25,0.26 0.17,0.56 0.25,0.56 "/> <polygon class="fil0" points="0.32,0.56 0.4,0.56 0.31,0.26 0.29,0.26 "/> </g> </g></svg>
 							<span class="nav-text">Airports List</span>
 						</a>
                     </li>
-					<li class="nav-label">Airlines</li>
+                    @endif
+                    @if(CheckRolePermission('airline_view'))
                     <li><a class="ai-icon" href="{{route('airlines.home')}}" aria-expanded="false">
 						<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="18" height="18" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"viewBox="0 0 0.24 0.35" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"><![CDATA[ .fil1{fill:#636669}.fil0{fill:#969BA0}]]> </style> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <g id="_977345192"> <path class="fil0" d="M0.09 0.09c-0.01,0 -0.02,-0 -0.02,-0 -0.03,-0 -0.01,0.01 -0.03,-0.02 -0,-0.01 -0.01,-0.01 -0.01,-0.02l-0.01 0c0.01,0.05 0.02,0.03 0.01,0.07 -0,0.01 -0.01,0.02 -0.01,0.03l0.01 0c0.01,-0.01 0.02,-0.02 0.02,-0.03l0.04 0 -0.02 0.08 0.02 -0 0.05 -0.07c0.02,-0.02 0.01,-0.01 0.05,-0.01 0.02,-0 0.04,0.01 0.05,-0.01 -0,-0.01 -0,-0.01 -0.01,-0.01 -0.01,-0.01 -0.02,-0.01 -0.04,-0.01 -0.05,0 -0.04,0.01 -0.06,-0.03l-0.04 -0.05c-0,-0 0,-0 -0.02,-0 0,0.01 0.02,0.07 0.02,0.08z"/> <path class="fil1" d="M-0 0.27c0.01,0.01 0.02,0.01 0.04,0.01 0.02,0 0.03,0 0.05,0 0,0.01 0.02,0.03 0.03,0.04 0,0.01 0.01,0.01 0.01,0.02 0,0.01 0.01,0.01 0.01,0.02l0.02 0c-0,-0.02 -0.02,-0.06 -0.02,-0.07 0.04,0 0.03,-0 0.05,0.02 0,0.01 0.01,0.01 0.01,0.02l0.01 0 -0.01 -0.05c-0,-0 0,-0.02 0.01,-0.02 0,-0.01 0,-0.02 0.01,-0.03l-0.01 0c-0,0.01 -0.02,0.02 -0.02,0.03l-0.04 0 0.02 -0.08 -0.02 0c-0.02,0.02 -0.04,0.05 -0.05,0.07 -0.01,0.01 -0,0.01 -0.02,0.01 -0.01,-0 -0.02,0 -0.03,0 -0.02,0 -0.03,-0 -0.04,0.01 -0,0 -0.01,0 -0.01,0.01z"/> </g> </g></svg>
 							<span class="nav-text">Airlines List</span>
 						</a>
                     </li>
-                    <li class="nav-label">Company</li>
+                    @endif
+                    @if(CheckRolePermission('company_view'))
                     <li><a class="ai-icon" href="{{route('companies.home')}}" aria-expanded="false">
 						<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="18" height="18" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"viewBox="0 0 0.6 0.6" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xodm="http://www.corel.com/coreldraw/odm/2003"> <defs> <style type="text/css"><![CDATA[ .fil0{fill:#969BA0}]]> </style> </defs> <g id="Layer_x0020_1"> <metadata id="CorelCorpID_0Corel-Layer"/> <g id="_849132984"> <path class="fil0" d="M0.51 0.5c0.02,-0 0.03,0.01 0.04,0.02 0.01,0.01 0,0.04 0,0.06l-0.08 0c0,-0.02 -0,-0.04 0,-0.06 0.01,-0.01 0.02,-0.02 0.04,-0.02zm-0.06 0.08l-0.08 0c0,-0.01 -0,-0.06 0,-0.07 0,-0.05 0.07,-0.05 0.08,-0 0,0.01 0,0.06 0,0.07zm-0.15 -0.12c0.02,0 0.04,0.02 0.05,0.04 0,0.01 0,0.07 0,0.08l-0.1 0c0,-0.02 -0,-0.07 0,-0.08 0.01,-0.02 0.02,-0.04 0.05,-0.04zm-0.15 0.05c0,-0.03 0.04,-0.05 0.06,-0.03 0.01,0.01 0.01,0.02 0.01,0.04 0,0.02 0,0.04 0,0.06l-0.08 0 -0 -0.07zm-0.06 -0.01c0.02,-0 0.04,0.02 0.04,0.04l0 0.04 -0.08 0c0,-0.02 -0,-0.04 0,-0.06 0.01,-0.01 0.02,-0.02 0.04,-0.02zm0.02 -0.04c-0.01,0.03 -0.04,0.02 -0.04,-0.01 0,-0.01 0.01,-0.02 0.02,-0.02 0.01,0 0.02,0.01 0.02,0.02zm0.38 -0c-0,-0.03 0.04,-0.03 0.04,-0 0,0.01 -0.01,0.02 -0.02,0.02 -0.01,0 -0.02,-0.01 -0.02,-0.02zm-0.08 -0.05c0.01,-0 0.02,0.01 0.02,0.01 0,0.01 -0.01,0.02 -0.01,0.02 -0.02,0.01 -0.04,-0.03 -0.01,-0.04zm-0.22 0c0.01,-0 0.02,0 0.02,0.01 0,0.01 -0,0.02 -0.01,0.02 -0.02,0.01 -0.04,-0.03 -0.01,-0.04zm0.11 -0.03c0.02,-0 0.03,0.01 0.03,0.02 0,0.02 -0.01,0.03 -0.02,0.03 -0.04,0.01 -0.05,-0.05 -0.01,-0.06zm0.14 -0.21l0.14 -0 0 0.34 -0.02 0c-0,-0 -0.01,-0.01 -0.01,-0.01 -0.01,-0.01 -0.01,-0.01 -0.01,-0.01 0,-0.01 0.01,-0.01 0.01,-0.02 0.01,-0.04 -0.05,-0.07 -0.07,-0.03 -0.01,0.02 0.01,0.04 0.01,0.04 -0,0 -0,0 -0.01,0 -0,0 -0,0 -0.01,0 -0,-0 -0,-0.01 -0,-0.01 -0.01,-0.01 -0.01,-0.02 -0.02,-0.02l-0 -0c0,-0 0.01,-0.01 0.01,-0.03 -0,-0.02 -0.01,-0.02 -0.01,-0.03 -0,-0.01 0,-0.06 0,-0.08l0 -0.11c0,-0.01 -0,-0.03 0,-0.04zm-0.28 0.29c-0,0 -0.01,0 -0.02,0.02 -0.01,0.01 -0.01,0.01 -0.01,0.02l-0.01 -0.01c0,-0.01 0.01,-0.01 0.01,-0.02 0.01,-0.04 -0.05,-0.07 -0.07,-0.03 -0.01,0.01 -0.01,0.02 0,0.04 0,0 0,0.01 0.01,0.01 -0,0 -0,0 -0.01,0 -0.01,0 -0.01,0.01 -0.02,0.02l-0.02 0 -0 -0.34 0.14 0c0,0.01 0,0.21 0,0.23 -0,0.01 -0.01,0.01 -0.01,0.03 -0,0.01 0,0.01 0,0.02 0,0 0.01,0.01 0.01,0.01zm0.11 -0.01c-0,0.01 -0.01,0 -0.03,0.03 -0,0 -0,0 -0,0 -0,0 -0,0 -0,0 -0,-0 -0.01,-0.01 -0.01,-0.01l-0.01 -0.01c0,-0.01 0.02,-0.02 0,-0.05 -0,-0.01 -0.01,-0.01 -0.02,-0.02 -0.01,-0.01 -0.02,-0 -0.03,-0l0 -0.37 0.24 0 0 0.37c-0.01,-0 -0.02,-0 -0.03,0 -0.02,0.01 -0.02,0.02 -0.02,0.04 0,0.01 0.01,0.02 0.01,0.02 -0,0 -0.01,0.01 -0.01,0.01 -0,0 -0.01,0.01 -0.01,0.01 -0.01,-0.02 -0.02,-0.02 -0.03,-0.03 0.01,-0.01 0.01,-0.01 0.01,-0.02 0,-0.01 0,-0.02 -0,-0.03 -0.02,-0.04 -0.08,-0.04 -0.09,-0 -0,0.01 -0.01,0.02 -0,0.03 0,0.01 0.01,0.02 0.01,0.02zm-0.11 -0.3c-0.02,0 -0.05,0 -0.07,0 -0.02,0 -0.05,0 -0.07,0 -0.02,0 -0.02,0 -0.02,0.02 0,0.04 -0,0.35 0,0.35 0,0.01 0.02,0.01 0.03,0.01 0,0.01 -0,0.01 -0,0.02 0,0.01 0,0.01 0,0.02 0,0.02 -0,0.03 0.01,0.03 0.14,-0 0.28,0 0.42,0 0.03,0 0.06,-0 0.08,0 0.02,0 0.01,-0.01 0.01,-0.03 0,-0.01 -0,-0.03 -0,-0.04 0.01,-0 0.02,0 0.03,-0.01 0,-0 0,-0.1 0,-0.11l0 -0.25c0,-0.02 0,-0.02 -0.02,-0.02 -0.05,0 -0.09,0 -0.14,0 -0,-0.02 0,-0.13 -0,-0.14 -0,-0.01 -0.02,-0.01 -0.03,-0.01l-0.22 0c-0.01,0 -0.03,-0 -0.03,0.01 -0,0.01 0,0.12 -0,0.14z"/> <path class="fil0" d="M0.25 0.06l0 0 0.1 0 -0 0.06 -0 0 -0.09 0 -0 -0 -0 -0.06zm-0.01 -0.02c-0.01,0 -0.01,0.01 -0.01,0.02l0 0.06c-0,0.01 0,0.02 0.01,0.02 0.01,-0 0.11,0 0.12,-0 0.01,-0 0.01,-0.01 0.01,-0.02l0 -0.06c0,-0.01 -0,-0.02 -0.02,-0.02 -0.01,0 -0.11,-0 -0.12,0z"/> <polygon class="fil0" points="0.11,0.39 0.13,0.39 0.13,0.23 0.11,0.23 "/> <polygon class="fil0" points="0.05,0.39 0.07,0.39 0.07,0.23 0.05,0.23 "/> <polygon class="fil0" points="0.53,0.39 0.55,0.39 0.55,0.23 0.53,0.23 "/> <polygon class="fil0" points="0.47,0.39 0.49,0.39 0.49,0.23 0.47,0.23 "/> <polygon class="fil0" points="0.29,0.26 0.29,0.26 0.31,0.26 0.31,0.24 0.29,0.24 "/> <polygon class="fil0" points="0.33,0.26 0.35,0.26 0.35,0.24 0.34,0.24 0.33,0.24 "/> <polygon class="fil0" points="0.25,0.26 0.25,0.26 0.26,0.26 0.27,0.26 0.27,0.24 0.25,0.24 "/> <polygon class="fil0" points="0.21,0.26 0.21,0.26 0.23,0.26 0.23,0.26 0.23,0.24 0.21,0.24 "/> <polygon class="fil0" points="0.37,0.26 0.37,0.26 0.38,0.26 0.39,0.26 0.39,0.24 0.37,0.24 "/> <polygon class="fil0" points="0.25,0.22 0.25,0.22 0.26,0.22 0.27,0.22 0.27,0.2 0.25,0.2 "/> <polygon class="fil0" points="0.21,0.3 0.23,0.3 0.23,0.28 0.21,0.28 "/> <polygon class="fil0" points="0.25,0.3 0.27,0.3 0.27,0.28 0.25,0.28 "/> <polygon class="fil0" points="0.37,0.3 0.39,0.3 0.39,0.28 0.37,0.28 "/> <polygon class="fil0" points="0.29,0.3 0.31,0.3 0.31,0.28 0.29,0.28 "/> <polygon class="fil0" points="0.21,0.22 0.21,0.22 0.23,0.22 0.23,0.22 0.23,0.2 0.21,0.2 "/> <polygon class="fil0" points="0.33,0.3 0.35,0.3 0.35,0.28 0.33,0.28 "/> <polygon class="fil0" points="0.37,0.22 0.39,0.22 0.39,0.2 0.37,0.2 "/> <polygon class="fil0" points="0.21,0.34 0.23,0.34 0.23,0.32 0.21,0.32 "/> <polygon class="fil0" points="0.25,0.34 0.27,0.34 0.27,0.32 0.25,0.32 "/> <polygon class="fil0" points="0.25,0.18 0.27,0.18 0.27,0.16 0.25,0.16 "/> <polygon class="fil0" points="0.33,0.22 0.35,0.22 0.35,0.2 0.33,0.2 "/> <polygon class="fil0" points="0.37,0.34 0.39,0.34 0.39,0.32 0.37,0.32 "/> <polygon class="fil0" points="0.29,0.22 0.31,0.22 0.31,0.2 0.29,0.2 "/> <polygon class="fil0" points="0.33,0.18 0.35,0.18 0.35,0.16 0.33,0.16 "/> <polygon class="fil0" points="0.29,0.18 0.31,0.18 0.31,0.16 0.29,0.16 "/> <polygon class="fil0" points="0.33,0.34 0.35,0.34 0.35,0.32 0.33,0.32 "/> <polygon class="fil0" points="0.29,0.34 0.31,0.34 0.31,0.32 0.29,0.32 "/> </g> </g></svg>
 							<span class="nav-text">Company List</span>
 						</a>
                     </li>
+                    @endif
+                    @if(CheckRolePermission('client_view'))
+                    <li><a class="ai-icon" href="{{route('client.home')}}" aria-expanded="false">
+                        <i class="far fa-address-card"></i>
+							<span class="nav-text">Client List</span>
+						</a>
+                    </li>
+                    @endif
+
+                    <li class="nav-label">Settings</li>
+                    @if(CheckRolePermission('user_view'))
+                    <li><a class="ai-icon" href="{{route('users.show')}}" aria-expanded="false">
+						<i class="fa fa-users" aria-hidden="true"></i>
+							<span class="nav-text">Users List</span>
+						</a>
+                    </li>
+                    @endif
+                    @if(CheckRolePermission('role_view'))
+                    <li><a class="ai-icon" href="{{route('roles.show')}}" aria-expanded="false">
+						<i class="fab fa-critical-role"></i>
+							<span class="nav-text">Roles</span>
+						</a>
+                    </li>
+                    @endif
+
+                    
                     <li class="nav-label">Account</li>
                     <li><a class="ai-icon" href="{{route('updateProfile.show')}}" aria-expanded="false">
 						<i class="fa fa-user" aria-hidden="true"></i>
@@ -215,7 +223,6 @@
           
     
     <script src="{{ asset('/files/vendor/global/global.min.js')}}"></script>
-	<script src="{{ asset('/files/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
 
 	<!-- Datatable -->
 	<script src="{{ asset('/files/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
@@ -225,7 +232,6 @@
 	<script src="{{ asset('/files/js/deznav-init.js')}}"></script>
     <!-- Toastr -->
     <script src="{{ asset('/files/vendor/toastr/js/toastr.min.js')}}"></script>
-    <script src="{{ asset('/files/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js')}}"></script>
     
 	<script>
 		jQuery(document).ready(function(){

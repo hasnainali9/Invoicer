@@ -6,11 +6,6 @@
 	var screenWidth = $( window ).width();
 	
 	
-	var handleSelectPicker = function(){
-		if(jQuery('.default-select').length > 0 ){
-			jQuery('.default-select').selectpicker();
-		}
-	}
 
 	var handleTheme = function(){
 		$('#preloader').fadeOut(500);
@@ -373,7 +368,7 @@
 			}
 			console.warn('option:', idx, $OPTION)
 		});
-		$_SELECT_PICKER.selectpicker();
+	
 	}
 	
 	
@@ -411,7 +406,7 @@
 		
 		load:function(){
 			handleTheme();
-			handleSelectPicker();
+		
 			handleImageSelect();
 		},
 		
