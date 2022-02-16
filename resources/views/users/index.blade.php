@@ -45,7 +45,7 @@
                             <td>
                                 <div class="d-flex action-button">
                                     @if(CheckRolePermission('user_edit'))
-                                    <a href="javascript:void(0);" data-id="{{$User->id}}" data-name="{{$User->name}}"  class="btn btn-info btn-xs light px-2 edit-trigger">
+                                    <a href="javascript:void(0);" data-id="{{$User->id}}" data-name="{{$User->name}}" data-email="{{$User->email}}" data-role_id="{{$User->role_id}}"  class="btn btn-info btn-xs light px-2 edit-trigger">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
@@ -155,16 +155,11 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" id="password" required name="password" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
+ 
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Role</label>
                         <div class="col-sm-9">
-                            <select name="role_id" class="form-control">
+                            <select name="role_id" id="role_id" class="form-control">
                                 @foreach(\App\Models\Role::where('id',"!=",'1')->get() as $Role)
                                 <option value="{{$Role->id}}">{{$Role->name}}</option>
                                 @endforeach
@@ -194,7 +189,8 @@
             $('body').delegate('.edit-trigger','click',function(){
                     $("#id").val($(this).attr('data-id'))
                     $("#name").val($(this).attr('data-name'));
-                   
+                    $("#email").val($(this).attr('data-email'));
+                    $("#role_id").val($(this).attr('data-role_id'));
                     $("#EditModal").modal('toggle');
             });
     });

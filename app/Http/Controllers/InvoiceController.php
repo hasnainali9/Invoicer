@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use App\Models\InvoiceVersion;
-use PDF;
+use Spatie\Browsershot\Browsershot;
+
 
 
 
@@ -281,13 +282,9 @@ class InvoiceController extends Controller
             $id=base64_decode($id);
             if(Invoice::where('id',$id)->first()){
                 
-                $data = [
-                    'Invoice'=>Invoice::where('id',$id)->first()
-                ];
-                $pdf = PDF::loadView('pdfview',$data);
-                return $pdf->download('document.pdf');;
-                ;
-                    //return view('invoices.single',['Invoice'=>Invoice::where('id',$id)->first()]);
+                
+                return Browsershot::url('http://147.182.133.230/Invoicer/public/index.php/app/invoices/MQ==/view')->format('A4')->save('example.pdf');
+
             }else{
                 return abort(404);
             }

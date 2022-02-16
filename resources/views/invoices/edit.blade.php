@@ -926,6 +926,7 @@
                 $("#other_charge_due_carrier_collected").val("");
 
                 $("#total_prepaid").val($("#total_collected").val());
+                
                 $("#total_collected").val("");
 
 
@@ -985,6 +986,7 @@
             });
 
                 $("#total_prepaid").val(total);
+               
         });
 
 

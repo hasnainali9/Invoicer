@@ -59,17 +59,15 @@ class UsersController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'email|required|unique:users',
-                'password' => 'required|min:6|confirmed',
                 'role_id'=>'required',
             ]);
 
             User::where('id',$request->id)->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=>$request->password,
                 'role_id'=>$request->role_id,
             ]);
-            return redirect()->back()->with('message', 'Data Added Successfully');
+            return redirect()->back()->with('message', 'Data Updated Successfully');
         }else{abort(401);}
     }
 

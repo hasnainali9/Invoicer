@@ -43,7 +43,7 @@
                             <td>
                                 <div class="d-flex action-button">
                                     @if(CheckRolePermission('client_edit'))
-                                    <a href="javascript:void(0);" data-id="{{$Client->id}}" data-line-1="{{$Client->line_1}}" data-line-2="{{$Client->line_2}}" data-line-3="{{$Client->line_3}}" data-line-4="{{$Client->line_4}}" class="btn btn-info btn-xs light px-2 edit-trigger">
+                                    <a href="javascript:void(0);" data-id="{{$Client->id}}" data-line_1="{{$Client->line_1}}" data-line_2="{{$Client->line_2}}" data-line_3="{{$Client->line_3}}" data-line_4="{{$Client->line_4}}" class="btn btn-info btn-xs light px-2 edit-trigger">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M17 3C17.2626 2.73735 17.5744 2.52901 17.9176 2.38687C18.2608 2.24473 18.6286 2.17157 19 2.17157C19.3714 2.17157 19.7392 2.24473 20.0824 2.38687C20.4256 2.52901 20.7374 2.73735 21 3C21.2626 3.26264 21.471 3.57444 21.6131 3.9176C21.7553 4.26077 21.8284 4.62856 21.8284 5C21.8284 5.37143 21.7553 5.73923 21.6131 6.08239C21.471 6.42555 21.2626 6.73735 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                         </svg>
@@ -131,22 +131,22 @@
                     <input type="hidden" name="id" id="id">
                     <div class="mb-3 row">
                         <div class="col-sm-12">
-                            <input type="text" maxlength="42" name="line_1" class="form-control" placeholder="Line 1">
+                            <input type="text" maxlength="42" id="line_1" name="line_1" class="form-control" placeholder="Line 1">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-sm-12">
-                            <input type="text" maxlength="42" name="line_2" class="form-control" placeholder="Line 2">
+                            <input type="text" maxlength="42" id="line_2" name="line_2" class="form-control" placeholder="Line 2">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-sm-12">
-                            <input type="text" maxlength="42" name="line_3" class="form-control" placeholder="Line 3">
+                            <input type="text" maxlength="42" id="line_3" name="line_3" class="form-control" placeholder="Line 3">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-sm-12">
-                            <input type="text" maxlength="42" name="line_4" class="form-control" placeholder="Line 4">
+                            <input type="text" maxlength="42" id="line_4" name="line_4" class="form-control" placeholder="Line 4">
                         </div>
                     </div>
                 </div>
@@ -171,9 +171,10 @@
     $(function(){
             $('body').delegate('.edit-trigger','click',function(){
                     $("#id").val($(this).attr('data-id'))
-                    $("#name").val($(this).attr('data-name'));
-                    $("#identification_no").val($(this).attr('data-identifier'));
-                    $("#img2").html('<img src="'+$(this).attr('data-logo')+'"/>');
+                    $("#line_1").val($(this).attr('data-line_1'));
+                    $("#line_2").val($(this).attr('data-line_2'));
+                    $("#line_3").val($(this).attr('data-line_3'));
+                    $("#line_4").val($(this).attr('data-line_4'));
                     $("#EditModal").modal('toggle');
             });
     });

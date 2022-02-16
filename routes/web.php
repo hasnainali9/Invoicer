@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Invoice;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +28,10 @@ Route::post('/app/users/update',  [App\Http\Controllers\UsersController::class, 
 Route::get('/app/users/{id}/delete',  [App\Http\Controllers\UsersController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/app/user/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.show');
+Route::post('/app/user/roles/create',  [App\Http\Controllers\RoleController::class, 'store'])->name('roles.create');
+Route::post('/app/user/roles/ajax/get',  [App\Http\Controllers\RoleController::class, 'getAjax'])->name('roles.getAjax');
+Route::post('/app/user/roles/update',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.update');
+Route::post('/app/user/roles/{id}/delete',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.destroy');
 
 
 
@@ -81,7 +85,15 @@ Route::get('/app/invoices', [App\Http\Controllers\InvoiceController::class, 'ind
 
 Route::get('/app/invoices/{id}/download', [App\Http\Controllers\InvoiceController::class, 'downloadInvoice'])->name('invoices.view.download');
 
-Route::get('/app/invoices/{id}/view', [App\Http\Controllers\InvoiceController::class, 'ViewSingle'])->name('invoices.view.single');
+Route::get('/app/invoices/{id}/view', function(){
+
+            if(Invoice::where('id','1')->first()){
+                    return view('invoices.single',['Invoice'=>Invoice::where('id','1')->first()]);
+            }else{
+                return abort(404);
+            }
+     
+})->name('invoices.view.single');
 Route::get('/app/invoices/{id}/view/versions', [App\Http\Controllers\InvoiceController::class, 'VersionsShowAll'])->name('invoices.view.single.versions');
 Route::get('/app/invoices/view/versions/{id}', [App\Http\Controllers\InvoiceController::class, 'VersionsShow'])->name('invoices.view.single.versions.show');
 Route::get('/app/invoices/versions/{id}/roll/back', [App\Http\Controllers\InvoiceController::class, 'VersionsRollBack'])->name('invoices.view.single.versions.roll.back');
