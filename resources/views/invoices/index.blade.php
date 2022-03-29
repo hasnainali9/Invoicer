@@ -58,6 +58,11 @@
                                        <i class="fa fa-eye"></i>
                                     </a>
                                     @endif
+                                    @if(CheckRolePermission('airway_view'))
+                                    <a href="{{route('invoices.duplicate.add.show',['id'=>base64_encode($Invoice->id)])}}"  class="btn btn-info btn-xs light mx-2 px-2 edit-trigger">
+                                        <i class="fa fa-clone"></i>
+                                    </a>
+                                    @endif
                                     @if(CheckRolePermission('airway_edit'))
                                     <a href="{{route('invoices.update.show',['id'=>base64_encode($Invoice->id)])}}"  class="btn btn-info btn-xs light mx-2 px-2 edit-trigger">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

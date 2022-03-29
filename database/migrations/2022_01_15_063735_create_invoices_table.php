@@ -22,10 +22,10 @@ class CreateInvoicesTable extends Migration
 
             $table->text('consignee_id')->nullable();
 
-            $table->integer('airline_id')->unsigned();
+            $table->unsignedBigInteger('airline_id');
             $table->foreign('airline_id')->references('id')->on('airlines');
 
-            $table->integer('issung_company_id')->unsigned();
+            $table->unsignedBigInteger('issung_company_id');
             $table->foreign('issung_company_id')->references('id')->on('companies');
 
             $table->text('accounting_payment_info')->nullable();
@@ -33,7 +33,7 @@ class CreateInvoicesTable extends Migration
 
             $table->text('account_no')->nullable();
             
-            $table->integer('departure_airport_id')->unsigned();
+            $table->unsignedBigInteger('departure_airport_id');
             $table->foreign('departure_airport_id')->references('id')->on('airports');
 
             $table->text('reference_no')->nullable();
@@ -63,7 +63,7 @@ class CreateInvoicesTable extends Migration
             $table->text('d_value_custom')->nullable();
 
 
-            $table->integer('destination_airport_id')->unsigned();
+            $table->unsignedBigInteger('destination_airport_id');
             $table->foreign('destination_airport_id')->references('id')->on('airports');
 
             $table->text('request_flight_on')->nullable();

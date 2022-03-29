@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Permission;
@@ -26,7 +27,11 @@ class RoleController extends Controller
     public function index()
     {
         if(CheckRolePermission('role_view')){
-            return view('role.index',['Roles'=>Role::all()]);
+            if(Auth::User()->role_id=="1"){
+                return view('role.index',['Roles'=>Role::where('name', '!=', "SuperAdmin")->get()]);
+            }else{
+                return view('role.index',['Roles'=>Role::where([['name', '!=', "SuperAdmin"],['name', '!=', "Admin"],['id',Auth::User()->role_id]])->get()]);
+            }
         }else{abort(401);}
     }
     
@@ -36,8 +41,6 @@ class RoleController extends Controller
             $request->validate([
                 'name' => 'required',
             ]);
-            return $request;
-      
             $role = Role::create([
                 'name'=>$request->name,
             ]);
@@ -120,7 +123,7 @@ class RoleController extends Controller
             if($request->role_delete=="on"){$role_delete=true;}
 
 
-            Permission::create([
+            Permission::insert([
                 
 
 
@@ -338,13 +341,20 @@ class RoleController extends Controller
             $body="";
 
             foreach(Permission::where('role_id',$request->id)->get() as $key=>$permission){
-                $body='<div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="on" id="e_'.$permission->type.'" name="'.$permission->type.'" checked>
+                $type=str_replace('_',' ',  $permission->type);
+                $type=ucwords($type);
+                $checked="";
+                if($permission->value){
+                    $checked="checked";
+                }
+                $body.='<div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="on" id="e_'.$permission->type.'" name="'.$permission->type.'" '.$checked.'>
                     <label class="form-check-label" for="e_'.$permission->type.'">
-                        '.$permission->type.'
+                        '.$type.'
                     </label>
                 </div>';
             }
+            return $body;
 
         }else{abort(401);}
     }

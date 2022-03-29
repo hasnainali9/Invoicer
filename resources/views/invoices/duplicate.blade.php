@@ -4,14 +4,12 @@
     <div class="card">
         <div class="card-header d-sm-flex d-block">
             <div class="me-auto mb-sm-0 mb-3">
-                <h4 class="card-title mb-2">Edit Airway Bill</h4>
+                <h4 class="card-title mb-2">Duplicating Airway Bill</h4>
             </div>
         </div>
         <div class="card-body">
-            <form action="{{route('invoices.update')}}" method="post" id="FormSubmit">
-                @csrf
-                <input type="hidden" value="{{$Invoice->id}}" name="id">
-                
+            <form action="{{route('invoices.store')}}" method="post" id="FormSubmit">
+                @csrf              
 
                 <div class="mb-3 row">
                     <label class="col-3 col-form-label">Capitalize</label>
@@ -602,7 +600,7 @@
                
                 <div class="mb-3 row">
                     <div class="col-10">
-                        <button type="submit" class="btn btn-primary">Update Invoice</button>
+                        <button type="submit" class="btn btn-primary">Create New Copy</button>
                     </div>
                 </div>
             </form>

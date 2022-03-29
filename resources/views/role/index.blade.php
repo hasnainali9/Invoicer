@@ -48,7 +48,7 @@
                                     </a>
                                     @endif
                                     @if(CheckRolePermission('role_delete'))
-                                    <a href="{{route('airports.destroy',['id'=>$Role->id])}}" class="ms-2 btn btn-xs px-2 light btn-danger">
+                                    <a href="{{route('roles.destroy',['id'=>$Role->id])}}" class="ms-2 btn btn-xs px-2 light btn-danger">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M3 6H5H21" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             <path d="M8 6V4C8 3.46957 8.21071 2.96086 8.58579 2.58579C8.96086 2.21071 9.46957 2 10 2H14C14.5304 2 15.0391 2.21071 15.4142 2.58579C15.7893 2.96086 16 3.46957 16 4V6M19 6V20C19 20.5304 18.7893 21.0391 18.4142 21.4142C18.0391 21.7893 17.5304 22 17 22H7C6.46957 22 5.96086 21.7893 5.58579 21.4142C5.21071 21.0391 5 20.5304 5 20V6H19Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -331,234 +331,16 @@
                 <div class="modal-body">
                     @csrf
                     <input type="hidden" name="id" id="id">
-                        <div class="mb-3 row">
-                            <label class="col-sm-3 col-form-label">Name</label>
-                            <div class="col-sm-9">
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Airport Name">
-                            </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-3 col-form-label">Role Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" id="e_name" class="form-control" placeholder="Role Name">
                         </div>
-
+                    </div>
+                    <div id="update-model">
                         
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="client_view" value="on" id="e_client_view" checked>
-                            <label class="form-check-label" for="e_client_view">
-                              Client List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="client_add" id="e_client_add" checked>
-                            <label class="form-check-label" for="e_client_add">
-                                Client List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="client_edit" id="e_client_edit" checked>
-                            <label class="form-check-label" for="e_client_edit">
-                                Client List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="client_delete" id="e_client_delete" checked>
-                            <label class="form-check-label" for="e_client_delete">
-                                Client List Delete
-                            </label>
-                        </div>
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="company_view" id="e_company_view" checked>
-                            <label class="form-check-label" for="e_company_view">
-                                Company List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="company_add" id="e_company_add" checked>
-                            <label class="form-check-label" for="e_company_add">
-                                Company List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="company_edit" id="e_company_edit" checked>
-                            <label class="form-check-label" for="e_company_edit">
-                                Company List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="company_delete" id="e_company_delete" checked>
-                            <label class="form-check-label" for="e_company_delete">
-                                Company List Delete
-                            </label>
-                        </div>
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airline_view" id="e_airline_view" checked>
-                            <label class="form-check-label" for="e_airline_view">
-                                Airline List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airline_add" id="e_airline_add" checked>
-                            <label class="form-check-label" for="e_airline_add">
-                                Airline List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airline_edit" id="e_airline_edit" checked>
-                            <label class="form-check-label" for="e_airline_edit">
-                                Airline List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airline_delete" id="e_airline_delete" checked>
-                            <label class="form-check-label" for="e_airline_delete">
-                                Airline List Delete
-                            </label>
-                        </div>
-
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airport_view" id="e_airport_view" checked>
-                            <label class="form-check-label" for="e_airport_view">
-                                Airport List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airport_add" id="e_airport_add" checked>
-                            <label class="form-check-label" for="e_airport_add">
-                                Airport List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airport_edit" id="e_airport_edit" checked>
-                            <label class="form-check-label" for="e_airport_edit">
-                                Airport List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airport_delete" id="e_airport_delete" checked>
-                            <label class="form-check-label" for="e_airport_delete">
-                                Airport List Delete
-                            </label>
-                        </div>
-
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_view" id="e_airway_view" checked>
-                            <label class="form-check-label" for="e_airway_view">
-                                Airway List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_add" id="e_airway_add" checked>
-                            <label class="form-check-label" for="e_airway_add">
-                                Airway List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_edit" id="e_airway_edit" checked>
-                            <label class="form-check-label" for="e_airway_edit">
-                                Airway List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_delete" id="e_airway_delete" checked>
-                            <label class="form-check-label" for="e_airway_delete">
-                                Airway List Delete
-                            </label>
-                        </div>
-
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_versions_view" id="e_airway_versions_view" checked>
-                            <label class="form-check-label" for="e_airway_versions_view">
-                                Airway Version List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_versions_view_single" id="e_airway_versions_view_single" checked>
-                            <label class="form-check-label" for="e_airway_versions_view_single">
-                                Airway Version View Single Bill
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_versions_roll_back" id="e_airway_versions_roll_back" checked>
-                            <label class="form-check-label" for="e_airway_versions_roll_back">
-                                Airway Roll Back to Version
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="airway_versions_delete" id="e_airway_versions_delete" checked>
-                            <label class="form-check-label" for="e_airway_versions_delete">
-                                Airway Version List Delete
-                            </label>
-                        </div>
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="user_view" id="e_user_view" checked>
-                            <label class="form-check-label" for="e_user_view">
-                                User List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="user_add" id="e_user_add" checked>
-                            <label class="form-check-label" for="e_user_add">
-                                User List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="user_edit" id="e_user_edit" checked>
-                            <label class="form-check-label" for="e_user_edit">
-                                User List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="user_delete" id="e_user_delete" checked>
-                            <label class="form-check-label" for="e_user_delete">
-                                User List Delete
-                            </label>
-                        </div>
-
-
-
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="role_view" id="e_role_view" checked>
-                            <label class="form-check-label" for="e_role_view">
-                                Role List View
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" name="role_add" id="e_role_add" checked>
-                            <label class="form-check-label" for="e_role_add">
-                                Role List Create
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" id="e_role_edit" name="role_edit" checked>
-                            <label class="form-check-label" for="e_role_edit">
-                                Role List Update
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="on" id="e_role_delete" name="role_delete" checked>
-                            <label class="form-check-label" for="e_role_delete">
-                                Role List Delete
-                            </label>
-                        </div>
-
+                    </div>
+                  
 
                        
                 </div>
@@ -582,8 +364,24 @@
 <script>
     $(function(){
             $('body').delegate('.edit-trigger','click',function(){
-                    $("#id").val($(this).attr('data-id'))
-                    $("#name").val($(this).attr('data-name'));
+                    $("#id").val($(this).attr('data-id'));
+                    var id=$(this).attr('data-id');
+                    $("#e_name").val($(this).attr('data-name'));
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('roles.getAjax')}}",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "id":id},
+                        success: function(data) {
+                            $("#update-model").html(data);
+                        },
+                        error: function(xhr) { // if error occured
+                            alert("Error occured.please try again");
+                            console.log(xhr);
+                        }
+                    });
                    
                     $("#EditModal").modal('toggle');
             });

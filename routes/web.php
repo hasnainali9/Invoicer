@@ -30,8 +30,8 @@ Route::get('/app/users/{id}/delete',  [App\Http\Controllers\UsersController::cla
 Route::get('/app/user/roles',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.show');
 Route::post('/app/user/roles/create',  [App\Http\Controllers\RoleController::class, 'store'])->name('roles.create');
 Route::post('/app/user/roles/ajax/get',  [App\Http\Controllers\RoleController::class, 'getAjax'])->name('roles.getAjax');
-Route::post('/app/user/roles/update',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.update');
-Route::post('/app/user/roles/{id}/delete',  [App\Http\Controllers\RoleController::class, 'index'])->name('roles.destroy');
+Route::post('/app/user/roles/update',  [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
+Route::get('/app/user/roles/{id}/delete',  [App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
 
 
 
@@ -85,15 +85,7 @@ Route::get('/app/invoices', [App\Http\Controllers\InvoiceController::class, 'ind
 
 Route::get('/app/invoices/{id}/download', [App\Http\Controllers\InvoiceController::class, 'downloadInvoice'])->name('invoices.view.download');
 
-Route::get('/app/invoices/{id}/view', function(){
-
-            if(Invoice::where('id','1')->first()){
-                    return view('invoices.single',['Invoice'=>Invoice::where('id','1')->first()]);
-            }else{
-                return abort(404);
-            }
-     
-})->name('invoices.view.single');
+Route::get('/app/invoices/{id}/view', [App\Http\Controllers\InvoiceController::class, 'ViewSingle'])->name('invoices.view.single');
 Route::get('/app/invoices/{id}/view/versions', [App\Http\Controllers\InvoiceController::class, 'VersionsShowAll'])->name('invoices.view.single.versions');
 Route::get('/app/invoices/view/versions/{id}', [App\Http\Controllers\InvoiceController::class, 'VersionsShow'])->name('invoices.view.single.versions.show');
 Route::get('/app/invoices/versions/{id}/roll/back', [App\Http\Controllers\InvoiceController::class, 'VersionsRollBack'])->name('invoices.view.single.versions.roll.back');
@@ -103,5 +95,10 @@ Route::get('/app/invoices/versions/{id}/destroy', [App\Http\Controllers\InvoiceC
 Route::get('/app/invoices/new', [App\Http\Controllers\InvoiceController::class, 'addIndex'])->name('invoices.add');
 Route::post('/app/invoices/store', [App\Http\Controllers\InvoiceController::class, 'store'])->name('invoices.store');
 Route::get('/app/invoices/{id}/update/view', [App\Http\Controllers\InvoiceController::class, 'updateIndex'])->name('invoices.update.show');
+
+Route::get('/app/invoices/{id}/duplicate/create', [App\Http\Controllers\InvoiceController::class, 'DuplicateInvoice'])->name('invoices.duplicate.add.show');
+
+
+
 Route::post('/app/invoices/update', [App\Http\Controllers\InvoiceController::class, 'update'])->name('invoices.update');
 Route::get('/app/invoices/destroy/{id}', [App\Http\Controllers\InvoiceController::class, 'destroy'])->name('invoices.destroy');

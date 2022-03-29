@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header d-sm-flex d-block">
             <div class="me-auto mb-sm-0 mb-3">
-                <h4 class="card-title mb-2">Create New Invoice</h4>
+                <h4 class="card-title mb-2">Create New Airway Bill</h4>
             </div>
         </div>
         <div class="card-body">
